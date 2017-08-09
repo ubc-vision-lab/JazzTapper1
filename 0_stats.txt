@@ -1,0 +1,2 @@
+subjectID,trial#,song_tempo,play_tempo,group,colour,section,match,song_mean,song_median,song_std,play_mean,play_median,play_std,play2_mean,play2_median,play2_std
+0,0,4,1,SHINY, APPLE, 3,0,0.64143,0.655,0.0049179,0.79444,0.7975,0.0055085,0.86031,0.87,0.0033549

@@ -1,0 +1,1 @@
+Please press OK when you are ready to start the 24 test trials.
