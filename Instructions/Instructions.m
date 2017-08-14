@@ -1,0 +1,3 @@
+This study asks you to listen to 24 songs followed by children at play. Each trial begins with a children's song for 15 seconds that is easy to tap to.  Please tap on the main beat of the song.  Once the song finishes you will begin hearing voices and sounds of children in a free play setting for 30 seconds.  Continue tapping while you hear the song play in your head during this period of children's play. It is important that you try to hear the song in your head during the play period. Each song will be repeated 3 times, so that if you are unfamiliar with it at the beginning, it will be more familiar by the end.
+
+Please press OK to continue.
