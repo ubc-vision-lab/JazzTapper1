@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 % Clear workspace
+
 clear all, clc
+
 
 
 

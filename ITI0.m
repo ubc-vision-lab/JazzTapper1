@@ -2,6 +2,7 @@ clear
 
 
 
+
 p = 26; %participant number // this changes
 t = 1;          %0 starting point...? 0 is practice
                 % program can mess up or practice goes bad so start with 1
@@ -9,6 +10,7 @@ t = 1;          %0 starting point...? 0 is practice
 the_end = 15;   %24 is the maximum number of trials
 
 threshold = 75 ; %the value that separates a press for idle
+
 quick = 0.2;
 
 loadname  = strcat('TrialLists_',sprintf('%02d',p),'.mat');
@@ -23,7 +25,9 @@ super_stats3 = {};
 
 for t = t:the_end;
 
+
 load_name = strcat('./data/mat/','p',sprintf('%02d',p),'t',num2str(t));
+
 
 load (load_name)
 
@@ -32,7 +36,9 @@ a_sorted = matBeat(1,:);
 a_sorted = sort(a_sorted);
 
 
+
 asd = figure; %todo: come up with a more descriptive variable name
+
 
 set(asd, 'Position', [100,0, 1750,1000])
 
@@ -199,7 +205,9 @@ for i = 1:length(super_stats1)
 end
 
 
+
 data_txt = './data/txt'
+
 filename = strcat(num2str(p),'_song.txt');
 csvwrite(filename, super_song)
 

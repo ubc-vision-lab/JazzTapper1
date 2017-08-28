@@ -99,5 +99,5 @@ list_of_trials = list_of_trials(randperm(length(list_of_trials)));
        
     end
 strcat('save(''',triallists_dir,'TrialLists_',num2str(iPart), ''',''save_trials'')')
-    eval(strcat('save(''',triallists_dir,'TrialLists_',num2str(iPart), ''',''save_trials'')'));
+eval(strcat('save(''',triallists_dir,'TrialLists_',num2str(iPart), ''',''save_trials'')'));
 %end
