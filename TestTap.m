@@ -1,23 +1,5 @@
-
-
-
-
-
-
-
-
-
-
+% Clear workspace
 clear all, clc
-
-
-
-
-
-
-
-
-
 
 
 
@@ -32,35 +14,34 @@ global matBeat;
 global x;
 global current_half;
 
+% Directories - should be in config...
+data_mat_dir = './data/mat/';
+data_txt_dir = './data/txt.';
+headers_dir = './Headers_Tapping/';
+stimuli_dir = './Stimuli';
 
-rand('state', sum(100*clock));
+
+rand('state', sum(100*clock)); %RNG Seed? (discouraged in MATLAB docs)
+% recommended: rng(sum(100*clock))
 
 
-%Input values
-%prompt = {'Participant Initials:', 'Window pointer (0/1):','Variable color (Gra/Yel):', 'Constant color (Gra/Yel):', 'Value for constant color:', 'Number of Trials:','Eye used:', 'Pixel Size:'};
+%% Prompt for participant number
+%{
+prompt = {'Participant Initials:', 'Window pointer (0/1):',
+'Variable color (Gra/Yel):', 'Constant color (Gra/Yel):',
+'Value for constant color:', 'Number of Trials:','Eye used:',
+'Pixel Size:'};
+%}
 prompt = {'Participant (pn):'};
-def = {'pn'};
+default_value = {'pn'};
 
 
 title = 'Touch 2 Vision Search';
-lineNo=1;
-answer = inputdlg(prompt,title,lineNo,def);
+numLines=1;
+answer = inputdlg(prompt,title,numLines,default_value);
+iPart = char(answer(1)); % Participant string
 
-
-
-
-
-
-
-
-
-
-
-
-iPart = char(answer(1));
-
-
-% Generate Trials
+%% Generate Trials
  matTrialsA = funGenTrials_Tapping(iPart);
  clear matTrials
  clear matAllTrials
@@ -100,8 +81,8 @@ x = 1;
 current_half = -1;
            
 %Load wave files
-matLoadHeader=wavread(strcat('/Users/jamesenns/Desktop/TestTap/Headers_Tapping/','header_tempo5_15s.wav'));
-matLoadStimuli=wavread(strcat('/Users/jamesenns/Desktop/TestTap/Stimuli/','tempo1_ASD_PURPLE_sample1_30s.wav'));
+matLoadHeader=wavread(strcat(headers_dir,'header_tempo5_15s.wav'));
+matLoadStimuli=wavread(strcat(stimuli_dir,'tempo1_ASD_PURPLE_sample1_30s.wav'));
 %matLoadHeader=wavread(strcat('/Users/jamesenns/Desktop/TestTap/Practice/','15_sec.wav'));
 %matLoadStimuli=wavread(strcat('/Users/jamesenns/Desktop/TestTap/Practice/','30_sec.wav'));
 
@@ -175,7 +156,7 @@ Screen('Flip', windowPart,0,0);
 
 % Save tapping data
 matName = strcat('p',iPart,'t0');        
-eval(strcat('save(''/Users/jamesenns/Desktop/TestTap/',matName, ''',''matBeat'')'));
+eval(strcat('save(',data_mat_dir,matName, ''',''matBeat'')'));
       
 
 
@@ -198,8 +179,8 @@ x = 1;
         current_half = -1;
         
         %Load header and song
-        matLoadHeader=wavread(strcat('/Users/jamesenns/Desktop/TestTap/Headers_Tapping/',matTrialsA{1,t}));
-        matLoadStimuli=wavread(strcat('/Users/jamesenns/Desktop/TestTap/Stimuli/',matTrialsA{2,t}));
+        matLoadHeader=wavread(strcat(headers_dir,matTrialsA{1,t}));
+        matLoadStimuli=wavread(strcat(stimuli_dir,matTrialsA{2,t}));
         
         megaLoad = [matLoadHeader; matLoadStimuli];
 
@@ -271,7 +252,7 @@ end;
         % Save tapping data
         matName = strcat('p',iPart,'t',num2str(t));
         
-        eval(strcat('save(''/Users/jamesenns/Desktop/TestTap/',matName, ''',''matBeat'')'));
+        eval(strcat('save(',data_mat_dir,matName, ''',''matBeat'')'));
 
         % One second pause and pass to next trial
         WaitSecs(1);
@@ -287,7 +268,7 @@ end
 
 
 %Save tapping data
- eval(strcat('save(''/Users/jamesenns/Desktop/TestTap/',matName, ''',''matBeat'')'));
+ eval(strcat('save(',data_mat_dir,matName, ''',''matBeat'')'));
 
 
 %Exit soft

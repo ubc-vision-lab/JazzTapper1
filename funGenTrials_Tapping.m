@@ -1,5 +1,9 @@
 function [matTrials] = funGenTrials_Peter(iPart)
    
+headers_dir = './Headers_Tapping/';
+stimuli_dir = './Stimuli/';
+triallists_dir = './TrialLists/';
+
 
 headerz = {};
 stimz{6, 2} = {};
@@ -13,47 +17,22 @@ list_of_trials = {};
 
 trials_multiplier = 1;
 
-files = dir('./Headers_Tapping/*.wav');
 
+%% go through all wav files in header directory, 
+files = dir(strcat(headers_dir,'*.wav'));
 for file = files'
     name = file.name;
-    parts = strread(name,'%s','delimiter','_');
-    if strcmp(parts{2}, 'tempo1')
-        tempo = 1;
-    elseif strcmp(parts{2}, 'tempo2')
-        tempo = 2;
-    elseif strcmp(parts{2}, 'tempo3')
-        tempo = 3;
-    elseif strcmp(parts{2}, 'tempo4')
-        tempo = 4;
-    elseif strcmp(parts{2}, 'tempo5')
-        tempo = 5;
-    elseif strcmp(parts{2}, 'tempo6')
-        tempo = 6;
-    end
-    
-    headerz{tempo} = name;
+    parts = textscan(name,'%s tempo%d %s','Delimiter','_');
+    tempo = parts{2};
+    headerz{tempo}=name;
 end
 
-        
-files = dir('./Stimuli/*.wav');
-
+%% go through all wav files stimuli directory
+files = dir(strcat(stimuli_dir,'*.wav'));
 for file = files'
     name = file.name;
-    parts = strread(name,'%s','delimiter','_');
-    if strcmp(parts{1}, 'tempo1')
-        tempo = 1;
-    elseif strcmp(parts{1}, 'tempo2')
-        tempo = 2;
-    elseif strcmp(parts{1}, 'tempo3')
-        tempo = 3;
-    elseif strcmp(parts{1}, 'tempo4')
-        tempo = 4;
-    elseif strcmp(parts{1}, 'tempo5')
-        tempo = 5;
-    elseif strcmp(parts{1}, 'tempo6')
-        tempo = 6;
-    end
+    parts = textscan(name,'tempo%d %s %s %s %s','delimiter','_');
+    tempo = parts{1};
     
     if strcmp(parts{2}, 'ASD')
         group = 1;
@@ -119,6 +98,6 @@ list_of_trials = list_of_trials(randperm(length(list_of_trials)));
        
        
     end
-
-    eval(strcat('save(''/Users/jamesenns/Desktop/TestTap/TrialLists_',num2str(iPart), ''',''save_trials'')'));
+strcat('save(''',triallists_dir,'TrialLists_',num2str(iPart), ''',''save_trials'')')
+    eval(strcat('save(''',triallists_dir,'TrialLists_',num2str(iPart), ''',''save_trials'')'));
 %end
